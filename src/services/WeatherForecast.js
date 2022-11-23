@@ -16,7 +16,7 @@ class WeatherForecast {
         this.temperatureLow = 0;
 
         this.location = ' ';
-        this.description = 'Please connect to internet to fetch latest forecast :)';
+        this.description = 'جار تحليل بيانات الطقس ...';
         this.weatherIcon = require('../assets/icons/weather/cloud.svg');
 
         this.update();

@@ -6,7 +6,11 @@ Vue.config.productionTip = false
 
 Vue.filter('changeToArDigits', (value) => {
   if (!value) return ''
-  value =  value.toString().replace(/\d/g, d =>  '٠١٢٣٤٥٦٧٨٩'[d])
+  if (value !== '0') {
+    value =  value.toString().replace(/\d/g, d =>  '٠١٢٣٤٥٦٧٨٩'[d])
+  } else {
+    value = '0'
+  }
   return value
 })
 
