@@ -19,6 +19,10 @@ class WeatherForecast {
         this.description = 'جار تحليل بيانات الطقس ...';
         this.weatherIcon = require('../assets/icons/weather/cloud.svg');
 
+        this.date = '';
+
+        this.list = [];
+
         this.update();
     }
 
@@ -38,14 +42,18 @@ class WeatherForecast {
     */
     async updateForecast(position) {
         let data = null;
+        let forecast = null;
 
         try {
             data = await this.getForecast(position.coords);
+            console.log(data)
+            forecast = await this.getDaysForecast(position.coords);
         } catch (e) {
             data = this.getErrorData();
+            forecast = this.getErrorForecastData();
         }
 
-        this.populate(data);
+        this.populate(data, forecast);
     }
 
     /*
@@ -54,8 +62,24 @@ class WeatherForecast {
     * @param {Object} coordinates - Lat & lon coordinates object.
     */
     async getForecast(coordinates) {
-        let appId = 'a3e7bdc246b811691b06aab13ccb0dbb';
+        // a3e7bdc246b811691b06aab13ccb0dbb
+        let appId = '38022ecab90ab659abc28cd7ec31106a';
         let endpoint = `https://api.openweathermap.org/data/2.5/weather?lat=${coordinates.latitude}&lon=${coordinates.longitude}&appid=${appId}&units=metric&lang=ar`;
+
+        let response = await fetch(endpoint);
+
+        return await response.json();
+    }
+
+     /*
+    * Fetch weather forecast for days from endpoint(openweathermap.org).
+    *
+    * @param {Object} coordinates - Lat & lon coordinates object.
+    */
+     async getDaysForecast(coordinates) {
+        // a3e7bdc246b811691b06aab13ccb0dbb
+        let appId = '38022ecab90ab659abc28cd7ec31106a';
+        let endpoint = `https://api.openweathermap.org/data/2.5/forecast?lat=${coordinates.latitude}&lon=${coordinates.longitude}&appid=${appId}&units=metric&lang=ar`;
 
         let response = await fetch(endpoint);
 
@@ -84,8 +108,18 @@ class WeatherForecast {
                 name: null,
                 sys: {
                     country: null
-                }
+                },
+                date: ''
             };
+    }
+
+    /*
+    * forecast Error data for end-users.
+    */
+    getErrorForecastData() {
+        return {
+            list: []
+        }
     }
 
     /*
@@ -93,7 +127,7 @@ class WeatherForecast {
     *
     * @param {Object} data - Weather forecast json data.
     */
-    populate(data) {
+    populate(data, forecast) {
         this.cloudiness = data.clouds.all;
         this.windSpeed = data.wind.speed;
         this.humidity = data.main.humidity;
@@ -103,6 +137,11 @@ class WeatherForecast {
         this.location = this.formatLocation(data.name, data.sys.country);
         this.description = data.weather[0].description;
         this.weatherIcon = this.getWeatherIcon(data.weather[0].id);
+        this.date = data.dt ? new Date(data.dt * 1000).toLocaleString('ar-eg').replace(' ', ' -- ') : ''
+        this.list = forecast.list
+        this.list.forEach(element => {
+            element.weather[0].icon = this.getWeatherIcon(element.weather[0].id)
+        });
     }
 
     /*

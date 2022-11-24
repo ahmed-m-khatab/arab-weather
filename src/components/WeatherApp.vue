@@ -16,7 +16,9 @@
             :location="this.forecast.location"
             :description="this.forecast.description"
             :icon="this.forecast.weatherIcon"
+            :date="this.forecast.date"
         ></Weather>
+
     </main>
 </template>
 

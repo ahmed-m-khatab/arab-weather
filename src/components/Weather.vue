@@ -1,8 +1,14 @@
 <template>
     <section>
         <div class="location">{{ location }}</div>
-        <div class="weather__description">{{ description }}</div>
-        <img class="weather__icon" :src="icon" :alt="description">
+        <div class="weather__description">
+            {{ description }}
+            <br v-if="date">
+            <span v-if="date">{{ date }}</span>
+        </div>
+        <div style="text-align: center;">
+            <img class="weather__icon" :src="icon" :alt="description">
+        </div>
     </section>
 </template>
 
@@ -22,6 +28,10 @@ export default {
         icon: {
             type: String,
             required: true
+        },
+        date: {
+            type: String,
+            required: false
         }
     }
 }
@@ -41,6 +51,7 @@ section {
 
 .weather__description, .location {
     font-size: 20px;
+    font-weight: bold;
 }
 
 .weather__description {
