@@ -46,8 +46,8 @@ class WeatherForecast {
 
         try {
             data = await this.getForecast(position.coords);
-            console.log(data)
             forecast = await this.getDaysForecast(position.coords);
+            console.log(forecast)
         } catch (e) {
             data = this.getErrorData();
             forecast = this.getErrorForecastData();
@@ -138,9 +138,10 @@ class WeatherForecast {
         this.description = data.weather[0].description;
         this.weatherIcon = this.getWeatherIcon(data.weather[0].id);
         this.date = data.dt ? new Date(data.dt * 1000).toLocaleString('ar-eg').replace(' ', ' -- ') : ''
-        this.list = forecast.list
-        this.list.forEach(element => {
+        this.daily = forecast
+        this.daily.list.forEach(element => {
             element.weather[0].icon = this.getWeatherIcon(element.weather[0].id)
+            element.dt_txt = new Date(element.dt * 1000).toLocaleString('ar-eg').replace(' ', ' -- ')
         });
     }
 

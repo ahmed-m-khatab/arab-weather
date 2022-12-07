@@ -4,7 +4,7 @@
             <img src="../assets/icons/cloud.svg" alt="cloudiness"><span class="cloudiness__value">{{ cloudiness | changeToArDigits }}</span>&percnt;
         </div>
         <div class="wind-speed" v-if="windSpeed">
-            <img src="../assets/icons/wind.svg" alt="wind speed"><span class="wind__value">{{ windSpeed | changeToArDigits }}</span>m/s
+            <img src="../assets/icons/wind.svg" alt="wind speed"><span class="wind__value">{{ windSpeed | changeToArDigits }}</span>م/س
         </div>
         <div class="humidity" v-if="humidity">
             <img src="../assets/icons/humidity.svg" alt="humidity"><span class="humidity__value">{{ humidity | changeToArDigits }}</span>&percnt;

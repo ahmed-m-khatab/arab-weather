@@ -1,21 +1,19 @@
 <template>
   <div id="app">
     <div class="app" :class="period">
-      <WeatherApp :class="period"></WeatherApp>
+      <router-view></router-view>
       <AppCredits :year="year"></AppCredits>
     </div>
   </div>
 </template>
 
 <script>
-import WeatherApp from './components/WeatherApp'
 import AppCredits from './components/AppCredits'
 
 export default {
   name: 'App',
 
   components: {
-    WeatherApp,
     AppCredits
   },
 
