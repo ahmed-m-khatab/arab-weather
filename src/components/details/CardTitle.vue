@@ -1,6 +1,7 @@
 <template>
     <div class="card-title">
-        <span class="city">{{city.name}}, {{city.country}}</span>
+        <h1>{{'تفاصيل الطقس في ' + city.name}}</h1>
+        <router-link to="/"><span class="return-icon">&LeftArrow;</span></router-link>
     </div>
 </template>
 
@@ -9,10 +10,6 @@ export default {
     props: {
         city: {
             type: Object,
-            required: true
-        },
-        icon: {
-            type: String,
             required: true
         }
     }
@@ -23,10 +20,12 @@ export default {
 .weather-icon {
     width: 50px;
 }
-.city {
-    font-size: 48px;
-}
 .card-title {
-    text-align: center;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.return-icon {
+    font-size: 30px;
 }
 </style>

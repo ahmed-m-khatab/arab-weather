@@ -4,7 +4,11 @@
         <div class="weather__description">
             {{ description }}
             <br v-if="date">
-            <span v-if="date">{{ date }}</span>
+            <span v-if="date">
+                {{ todayDate }}
+                <br>
+                {{ currentTime }}
+            </span>
         </div>
         <div style="text-align: center;">
             <img class="weather__icon" :src="icon" :alt="description">
@@ -33,6 +37,17 @@ export default {
             type: String,
             required: false
         }
+    },
+
+    computed: {
+        todayDate () {
+            if (this.date) return this.date.split('--')[0]
+            else return ''
+        },
+        currentTime () {
+            if (this.date) return this.date.split('--')[1]
+            else return ''
+        }
     }
 }
 </script>
@@ -59,7 +74,7 @@ section {
     margin-left: 10%;
     margin-right: 10%;
     text-align: center;
-    margin-top: 20px;
+    margin-top: 5px;
 }
 
 .weather__description:first-letter {
@@ -67,6 +82,6 @@ section {
 }
 
 .weather__icon {
-    width: 15em;
+    width: 10em;
 }
 </style>

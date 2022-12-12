@@ -62,7 +62,7 @@ main {
     background-position: center;
     background-size: cover;
     background-repeat: no-repeat;
-
+    position: relative;
     display: flex;
     flex-direction: column;
     justify-content: stretch;
@@ -84,7 +84,7 @@ main.app--night {
     border-radius: 50px;
     padding: 5px 15px;
     position: absolute;
-    bottom: 70px;
+    top: 90%;
     transition: all .5s ease;
 }
 .link:hover {
@@ -97,7 +97,6 @@ main.app--night {
     main {
         width: 330px;
         height: 600px;
-
         border-radius: 5px;
     }
 }

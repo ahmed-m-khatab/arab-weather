@@ -2,11 +2,11 @@ import Vue from 'vue'
 import App from './App.vue'
 import router from './routes.js'
 import './registerServiceWorker'
+import titleMixin from './mixins/titleMixin'
 
 Vue.config.productionTip = false
 
-// Vue.use(VueRouter)
-
+Vue.mixin(titleMixin)
 
 Vue.filter('changeToArDigits', (value) => {
   if (!value) return ''

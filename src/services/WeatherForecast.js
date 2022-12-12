@@ -137,11 +137,11 @@ class WeatherForecast {
         this.location = this.formatLocation(data.name, data.sys.country);
         this.description = data.weather[0].description;
         this.weatherIcon = this.getWeatherIcon(data.weather[0].id);
-        this.date = data.dt ? new Date(data.dt * 1000).toLocaleString('ar-eg').replace(' ', ' -- ') : ''
+        this.date = data.dt ? new Date().toLocaleString('ar-eg', { weekday: 'long' }) + ' ' +  new Date(data.dt * 1000).toLocaleString('ar-eg').replace(' ', ' -- ') : ''
         this.daily = forecast
         this.daily.list.forEach(element => {
             element.weather[0].icon = this.getWeatherIcon(element.weather[0].id)
-            element.dt_txt = new Date(element.dt * 1000).toLocaleString('ar-eg').replace(' ', ' -- ')
+            element.dt_txt = new Date().toLocaleString('ar-eg', { weekday: 'long' }) + ' ' + new Date(element.dt * 1000).toLocaleString('ar-eg').replace(' ', ' -- ')
         });
     }
 
